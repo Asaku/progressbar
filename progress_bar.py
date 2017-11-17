@@ -26,6 +26,7 @@
 try:
   import Tkinter              # Python 2
   import ttk
+  import winsound
 except ImportError:
   import tkinter as Tkinter   # Python 3
   import tkinter.ttk as ttk
@@ -35,6 +36,8 @@ def main():
 	ft = ttk.Frame(height=100)
 	
 	ft.pack(expand=True, fill=Tkinter.BOTH, side=Tkinter.TOP)
+	winsound.PlaySound('sonic.wav', winsound.SND_FILENAME)
+
 
 	pb_hd = ttk.Progressbar(ft, orient='horizontal', mode='determinate')
 	pb_hd.pack(expand=True, fill=Tkinter.BOTH, side=Tkinter.TOP)
